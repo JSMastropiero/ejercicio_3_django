@@ -11,10 +11,16 @@ Utiliza python y django como framework.
 
 ## Instalación
 
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu_usuario/generador-de-matrices.git
-   cd generador-de-matrices
+# Clonar el repositorio
+
+Para clonar el repositorio, ejecuta el siguiente comando:
+
+```bash
+git clone https://github.com/JSMastropiero/ejercicio_3_django.git
+
+cd ejercicio_3_django/ejercicio_3
+
+
 
 
 docker-compose build
