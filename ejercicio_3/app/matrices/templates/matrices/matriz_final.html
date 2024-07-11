@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matriz Final</title>
+</head>
+<body>
+    <h1>Matriz Final</h1>
+    <table>
+        {% for fila in matriz %}
+            <tr>
+                {% for celda in fila %}
+                    <td>{{ celda }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'generar_matriz' %}">Generar Nueva Matriz</a>
+</body>
+</html>

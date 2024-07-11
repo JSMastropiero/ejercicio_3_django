@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matriz Ordenada</title>
+</head>
+<body>
+    <h1>Matriz Ordenada</h1>
+    <table>
+        {% for fila in matriz %}
+            <tr>
+                {% for celda in fila %}
+                    <td>{{ celda }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'espejar_matriz' matriz_id %}">Espejar Matriz</a>
+</body>
+</html>

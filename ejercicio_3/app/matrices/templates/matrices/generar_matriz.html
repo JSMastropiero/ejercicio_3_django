@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generar Matriz</title>
+    <script>
+        function validateForm() {
+            var filas = document.forms["matrizForm"]["filas"].value;
+            var columnas = document.forms["matrizForm"]["columnas"].value;
+            if (filas <= 0 || columnas <= 0) {
+                alert("El número de filas y columnas debe ser positivo.");
+                return false;
+            }
+            if (!Number.isInteger(Number(filas)) || !Number.isInteger(Number(columnas))) {
+                alert("El número de filas y columnas debe ser un entero.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Generar Matriz</h1>
+    <form name="matrizForm" method="post" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <label for="filas">Filas:</label>
+        <input type="number" id="filas" name="filas" min="1" required>
+        <br>
+        <label for="columnas">Columnas:</label>
+        <input type="number" id="columnas" name="columnas" min="1" required>
+        <br>
+        <button type="submit">Generar</button>
+    </form>
+    <a href="{% url 'listar_matrices' %}">Ver matrices generadas</a>
+</body>
+</html>
+

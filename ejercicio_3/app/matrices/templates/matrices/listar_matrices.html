@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listar Matrices</title>
+</head>
+<body>
+    <h1>Listar Matrices</h1>
+    <ul>
+        {% for matriz in matrices %}
+            <li>
+                <a href="{% url 'ver_matriz' matriz.id %}">Matriz {{ matriz.id }} - {{ matriz.filas }}x{{ matriz.columnas }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'generar_matriz' %}">Generar Nueva Matriz</a>
+</body>
+</html>
