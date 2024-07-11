@@ -1,0 +1,129 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        int filas = 5;
+        int columnas = 3;
+
+        // Generar matriz
+        int[,] matrizOriginal = GenerarMatriz(filas, columnas);
+        Console.WriteLine("Matriz Original:");
+        ImprimirMatriz(matrizOriginal);
+
+        // Ordenar matriz
+        int[,] matrizOrdenada = OrdenarMatriz(matrizOriginal);
+        Console.WriteLine("\nMatriz Ordenada:");
+        ImprimirMatriz(matrizOrdenada);
+
+        // Espejar matriz
+        int[,] matrizEspejada = EspejarMatriz(matrizOrdenada);
+        Console.WriteLine("\nMatriz Espejada:");
+        ImprimirMatriz(matrizEspejada);
+    }
+
+    static int[,] GenerarMatriz(int filas, int columnas)
+    {
+        if (filas <= 0 || columnas <= 0)
+        {
+            Console.WriteLine("El número de filas y columnas debe ser un entero positivo.");
+            return null;
+        }
+
+        int[,] matriz = new int[filas, columnas];
+        Random rand = new Random();
+
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                matriz[i, j] = rand.Next(1, 1001);
+            }
+        }
+
+        return matriz;
+    }
+
+    static int[,] OrdenarMatriz(int[,] matriz)
+    {
+        int filas = matriz.GetLength(0);
+        int columnas = matriz.GetLength(1);
+
+        List<int> listaPlana = new List<int>();
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                listaPlana.Add(matriz[i, j]);
+            }
+        }
+
+        // Ordenar la lista plana 
+        listaPlana = OrdenarLista(listaPlana);
+
+        int[,] matrizOrdenada = new int[filas, columnas];
+        int k = 0;
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                matrizOrdenada[i, j] = listaPlana[k];
+                k++;
+            }
+        }
+
+        return matrizOrdenada;
+    }
+
+    static List<int> OrdenarLista(List<int> lista)
+    {
+        int n = lista.Count;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (lista[j] > lista[j + 1])
+                {
+                    int temp = lista[j];
+                    lista[j] = lista[j + 1];
+                    lista[j + 1] = temp;
+                }
+            }
+        }
+        return lista;
+    }
+
+    static int[,] EspejarMatriz(int[,] matriz)
+    {
+        int filas = matriz.GetLength(0);
+        int columnas = matriz.GetLength(1);
+
+        int[,] matrizEspejada = new int[filas, columnas];
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                matrizEspejada[i, j] = matriz[filas - 1 - i, columnas - 1 - j];
+            }
+        }
+
+        return matrizEspejada;
+    }
+
+    static void ImprimirMatriz(int[,] matriz)
+    {
+        int filas = matriz.GetLength(0);
+        int columnas = matriz.GetLength(1);
+
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                Console.Write(matriz[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+}
