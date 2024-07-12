@@ -9,6 +9,12 @@ services:
       POSTGRES_DB: project
       POSTGRES_USER: projectuser
       POSTGRES_PASSWORD: projectpassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U projectuser -d project"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   web:
     build: .
     command: sh -c "python app/manage.py migrate && python app/manage.py runserver 0.0.0.0:8000"
@@ -17,7 +23,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:
